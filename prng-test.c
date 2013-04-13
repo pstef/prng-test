@@ -9,12 +9,9 @@
 #include <sys/time.h>
 #include "generators.h"
 
-#define NELEM(array) (sizeof(array) / sizeof(array[0]))
+#define NELEM(array) ((sizeof array) / (sizeof array[0]))
 
-typedef unsigned long int(generator)(void);
-typedef void(initializer)(unsigned long int);
-
-void options(int argc, char *argv[]);
+static void options(int argc, char *argv[]);
 
 static struct {
   FILE *output;
@@ -27,6 +24,9 @@ static struct {
 
 int main(int argc, char *argv[]) {
   options(argc, argv);
+
+  typedef unsigned long int(generator)(void);
+  typedef void(initializer)(unsigned long int);
 
   struct stats {
     double time;
@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     if (i == NELEM(prngs)) {
       fprintf(stderr,
               "Generator \"%s\" not found. "
-              "Type \"%s -l\" to get list all generators.\n",
+              "Type \"%s -l\" to get list of all generators.\n",
               Options.generator_name, argv[0]);
       exit(EXIT_FAILURE);
     }
@@ -82,7 +82,7 @@ int main(int argc, char *argv[]) {
     while (j--) {
       uint32_t chunk = (uint32_t) prngs[i].g();
       if (1 > fwrite(&chunk, sizeof chunk, 1, Options.output)) {
-        fprintf(stderr, "Error writing to file.");
+        fprintf(stderr, "Error writing to file.\n");
         exit(EXIT_FAILURE);
       }
     }
@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 
-void options(int argc, char *argv[]) {
+static void options(int argc, char *argv[]) {
   int c;
   extern char *optarg;
   extern int optopt;
@@ -159,7 +159,7 @@ void options(int argc, char *argv[]) {
         fprintf(stderr, "-%c requires an argument.\n", optopt);
         break;
       case '?':
-        fprintf(stderr, "Unknown argument %c.\n", optopt);
+        fprintf(stderr, "Unknown option %c.\n", optopt);
         break;
     }
   }

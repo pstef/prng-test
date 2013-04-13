@@ -70,10 +70,10 @@ void init_mt(unsigned long int seed) {
 /* generates a random number on [0,0xffffffff]-interval */
 unsigned long int mt_rand(void) {
   unsigned long int y;
-  static unsigned long int mag01[2] = { 0x0UL, MATRIX_A };
-  /* mag01[x] = x * MATRIX_A  for x=0,1 */
 
   if (mti >= N) { /* generate N words at one time */
+    static unsigned long int mag01[2] = { 0x0UL, MATRIX_A };
+    /* mag01[x] = x * MATRIX_A  for x=0,1 */
     int kk;
 
     for (kk = 0; kk < N - M; kk++) {
