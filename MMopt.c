@@ -5,13 +5,14 @@
  * and Parallel Computers" by Richard P. Brent */
 
 #include "generators.h"
+#include <limits.h>
 
 #define R 128U
 #define S 82U
 #define T 53U
 
 static unsigned long int sequence[R];
-static unsigned int a, b, c;
+static unsigned char a, b, c;
 
 void init_mmopt(unsigned long int seed) {
   unsigned int i;
@@ -29,6 +30,16 @@ void init_mmopt(unsigned long int seed) {
   return;
 }
 
+#if (CHAR_BIT == 8)
+
+unsigned long int rand_mmopt(void) {
+  return sequence[++a] += sequence[++b] + sequence[++c];
+}
+
+#else
+
 unsigned long int rand_mmopt(void) {
   return sequence[++a & 127] += sequence[++b & 127] + sequence[++c & 127];
 }
+
+#endif
