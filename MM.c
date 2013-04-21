@@ -12,8 +12,8 @@ static unsigned int a, b;
 void init_mm(unsigned long int seed) {
   unsigned int i;
 
-  b = K - K;
-  a = K - L;
+  b = K;
+  a = L;
 
   for (i = 0; i < K * 2; i++)
     sequence[i % K] = seed = (1664525 * seed + 1013904223);
@@ -22,10 +22,10 @@ void init_mm(unsigned long int seed) {
 }
 
 unsigned long int rand_mm(void) {
-  if (++b == K)
+  if (b++ == K)
     b = 0;
 
-  if (++a == K)
+  if (a++ == K)
     a = 0;
 
   return sequence[b] += sequence[a];

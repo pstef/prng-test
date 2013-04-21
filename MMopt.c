@@ -17,9 +17,9 @@ static unsigned char a, b, c;
 void init_mmopt(unsigned long int seed) {
   unsigned int i;
 
-  a = R - R;
-  b = R - S;
-  c = R - T;
+  a = R;
+  b = S;
+  c = T;
 
   for (i = 0; i < R * 2; i++)
     sequence[i % R] = seed = (1664525 * seed + 1013904223);
