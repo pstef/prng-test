@@ -21,12 +21,23 @@ void init_mm(unsigned long int seed) {
   return;
 }
 
+#if 0
+/* Clearer version. Alternative clear version would just:
+   return sequence[b % K] += sequence[a % K]; */
 unsigned long int rand_mm(void) {
-  if (b++ == K)
+  if (++b == K)
     b = 0;
 
-  if (a++ == K)
+  if (++a == K)
     a = 0;
 
   return sequence[b] += sequence[a];
 }
+
+#else
+/* Faster version */
+unsigned long int rand_mm(void) {
+  return sequence[b = (b == K) ? 0 : b + 1] += sequence[a = (a == K) ? 0 : a + 1];
+}
+
+#endif
