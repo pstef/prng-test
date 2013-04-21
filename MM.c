@@ -6,27 +6,27 @@
 #define L 37U
 #define K 100U
 
-static unsigned long int rgiState[K];
-static unsigned int aState, bState;
+static unsigned long int sequence[K];
+static unsigned int a, b;
 
 void init_mm(unsigned long int seed) {
   unsigned int i;
 
-  bState = K - K;
-  aState = K - L;
+  b = K - K;
+  a = K - L;
 
   for (i = 0; i < K * 2; i++)
-    rgiState[i % K] = seed = (1664525 * seed + 1013904223);
+    sequence[i % K] = seed = (1664525 * seed + 1013904223);
 
   return;
 }
 
 unsigned long int rand_mm(void) {
-  if (++bState == K)
-    bState = 0;
+  if (++b == K)
+    b = 0;
 
-  if (++aState == K)
-    aState = 0;
+  if (++a == K)
+    a = 0;
 
-  return rgiState[bState] += rgiState[aState];
+  return sequence[b] += sequence[a];
 }
