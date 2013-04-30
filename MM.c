@@ -3,21 +3,14 @@
 
 #include "generators.h"
 
-static inline unsigned long int rand_mm1(void);
-static inline unsigned long int rand_mm2(void);
-static inline unsigned long int rand_mm3(void);
-
 #define L 37U
 #define K 100U
 
 static unsigned long int sequence[K];
-static unsigned int b, a;
+static unsigned int b = L, a = K;
 
 void init_mm(unsigned long int seed) {
   unsigned int i;
-
-  a = K;
-  b = L;
 
   for (i = 0; i < K * 2; i++)
     sequence[i % K] = seed = (1664525 * seed + 1013904223);
@@ -26,6 +19,10 @@ void init_mm(unsigned long int seed) {
 }
 
 /* This way I export one of the implementations below */
+static inline unsigned long int rand_mm1(void);
+static inline unsigned long int rand_mm2(void);
+static inline unsigned long int rand_mm3(void);
+
 unsigned long int rand_mm(void) {
   return rand_mm3();
 }
