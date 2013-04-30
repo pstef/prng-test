@@ -8,9 +8,9 @@
 
 #include "generators.h"
 
-#define R 128U
-#define S 82U
-#define T 53U
+#define R 32U
+#define S 21U
+#define T 12U
 
 static unsigned long int sequence[R];
 static unsigned int a = R, b = S, c = T;
