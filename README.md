@@ -51,3 +51,5 @@ prng-test
 * [Mersenne numbers](http://oeis.org/A000225)
 * [F. Panneton's website](http://www.iro.umontreal.ca/~panneton/)
 * [Further references](http://sprng.fsu.edu/Version4.0/refs.html)
+* http://www.firstpr.com.au/dsp/rand31/
+* [Numerical recipes in C](http://apps.nrbook.com/c/index.html)
