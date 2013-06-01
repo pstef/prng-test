@@ -8,12 +8,13 @@
 
 #include "generators.h"
 
-#define R 32U
-#define S 21U
-#define T 12U
+#define R 250U
+#define S 200U
+#define T 103U
+#define U 50U
 
 static unsigned long int sequence[R];
-static unsigned int a = R, b = S, c = T;
+static unsigned int a = R, b = S, c = T, d = U;
 
 void init_mmopt(unsigned long int seed) {
   unsigned int i;
@@ -28,5 +29,5 @@ void init_mmopt(unsigned long int seed) {
 }
 
 unsigned long int rand_mmopt(void) {
-  return sequence[++a % R] += sequence[++b % R] + sequence[++c % R];
+  return sequence[++a % R] += sequence[++b % R] += sequence[++c % R] += sequence[++d % R];
 }
