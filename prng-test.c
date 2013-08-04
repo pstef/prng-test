@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 
   struct entry prngs[] = {
     { { 0 }, "derp", rand_derp, init_derp },
-    { { 0 }, "LGC-k1", LCGk1, init_LCGk1 },
+    { { 0 }, "LCG-k1", LCGk1, init_LCGk1 },
     { { 0 }, "MM", rand_mm, init_mm },
     { { 0 }, "MMopt", rand_mmopt, init_mmopt },
     { { 0 }, "MT19937", mt_rand, init_mt },
@@ -104,8 +104,13 @@ static void options(int argc, char *argv[]) {
   Options.chunks = 1024 * 1024UL;
   Options.seed = 1;
 
+  if (argc < 2) {
+    goto help;
+  }
+
   while ((c = getopt(argc, argv, ":hlo:s:bg:n:")) != -1) {
     switch (c) {
+      help:
       case 'h':  //-h help
         fprintf(stderr,
                 "  -h help\n"
