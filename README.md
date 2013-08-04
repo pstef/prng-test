@@ -48,6 +48,8 @@ prng-test
 * Andrew Karl: [Pseudorandom Numbers: Generation, Statistical Measures, Monte Carlo Methods, and Implementation in C++](http://economics.nd.edu/assets/24019/karl_a.pdf)
 * G. Marsaglia, A. Zaman: Some portable very-long-period random number generators
 * George Marsaglia: [A current view of random number generators](http://www.stat.fsu.edu/pub/diehard/cdrom/pscript/keynote.ps)
+* Amy Glen: [On the Period Length of Pseudorandom Number Sequences](http://amyglen.files.wordpress.com/2011/12/thesis2002.pdf)
+* David J. Wright: [Solving Congruences: The Chinese Remainder Theorem](http://www.math.okstate.edu/~wrightd/crypt/lecnotes/node21.html)
 * [Mersenne numbers](http://oeis.org/A000225)
 * [F. Panneton's website](http://www.iro.umontreal.ca/~panneton/)
 * [Further references](http://sprng.fsu.edu/Version4.0/refs.html)
