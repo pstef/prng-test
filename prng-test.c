@@ -6,6 +6,7 @@
 #include <strings.h>
 #include <time.h>
 #include <inttypes.h>
+#include <errno.h>
 #include <sys/time.h>
 #include "generators.h"
 
@@ -132,15 +133,13 @@ static void options(int argc, char *argv[]) {
         break;
       case 's':    //-s use external seed; -s `date +'%s'` is a nice example
       case 'n': {  //-n how many 32-bit numbers
-        unsigned long int number = strtoul(optarg, NULL, 10);
-        if (0 == number) {
-          if (!strcmp(optarg, "0")) {
-            fprintf(stderr, "-%c requires an integer greater than 0.\n", c);
-          } else {
-            fprintf(stderr,
-                    "Unable to convert text \"%s\" into a positive number.\n",
-                    optarg);
-          }
+        char *endptr;
+        errno = 0;
+        unsigned long int number = strtoul(optarg, &endptr, 10);
+        if (errno != 0 || *endptr != '\0') {
+          fprintf(stderr,
+                  "Unable to convert text \"%s\" into a positive number within supported range.\n",
+                  optarg);
           exit(EXIT_FAILURE);
         }
         switch (c) {
