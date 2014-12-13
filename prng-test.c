@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
     unsigned long int j = Options.chunks;
     struct timeval before, after;
     gettimeofday(&before, NULL);
-    while (j--) {
+    while (Options.chunks == 0 || j--) {
       uint32_t chunk = (uint32_t) prngs[i].g();
       if (1 > fwrite(&chunk, sizeof chunk, 1, Options.output)) {
         fprintf(stderr, "Error writing to file.\n");
