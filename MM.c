@@ -7,7 +7,7 @@
 #define K 100U
 
 static unsigned long int sequence[K];
-static unsigned int b = L, a = K;
+static unsigned int b = L-1, a = K-1;
 
 void init_mm(unsigned long int seed) {
   unsigned int i;
@@ -49,5 +49,5 @@ static inline unsigned long int rand_mm2(void) {
 
 /* Faster version */
 static inline unsigned long int rand_mm3(void) {
-  return sequence[a = (a == K) ? 0 : a + 1] += sequence[b = (b == K) ? 0 : b + 1];
+  return sequence[a = (a == K-1) ? 0 : a + 1] += sequence[b = (b == K-1) ? 0 : b + 1];
 }
